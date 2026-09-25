@@ -12,14 +12,20 @@ Get `street-tools.zip` from the [latest release](https://github.com/quietcactus/
 
 1. In WordPress, go to **Plugins > Add New > Upload Plugin**.
 2. Upload `street-tools.zip` and activate it.
-3. Open **Street Tools** in the admin sidebar.
+3. Open **Street Tools** in the admin sidebar, or use the **Settings** link on the plugin's row in the Plugins screen.
 
 Or unzip it into `wp-content/plugins/` so the plugin lives at `wp-content/plugins/street-tools/street-tools.php`.
 
-Notes:
+Every tool requires the `manage_options` capability, so only administrators can use them.
 
-- The plugin hides itself from the Plugins screen once active. Use the **Street Tools** admin menu to reach it.
-- Every tool requires the `manage_options` capability, so only administrators can use them.
+### Hiding the plugin
+
+The plugin shows on the Plugins screen and in the admin sidebar by default. To hide either one, add these to `wp-config.php`:
+
+```php
+define('STREET_TOOLS_HIDE_PLUGIN_ROW', true); // hide the row on the Plugins screen
+define('STREET_TOOLS_HIDE_MENU', true);       // hide the Street Tools admin menu
+```
 
 ## Update
 
@@ -39,30 +45,50 @@ The migration does not carry over:
 
 ## Tools
 
+### Audits / Checks
+
+| Tool | What it does |
+|------|--------------|
+| Broken Link Checker | Scan published content for broken links and images, with batched HTTP checks. |
+| Favicon Checker | Check that favicon markup, the .ico size variants and every icon file are present and non-empty. |
+| H1 Checker | List every H1 saved in a post type's content and custom fields, including ACF and Elementor. |
+| Image Checker | List the image every post holds per image field, spot empty or broken ones, and export the lot to CSV. |
+| Phone Number Checker | Scan published content for phone numbers not wrapped in a `tel:` link. |
+| Robots.txt Checker | See the robots.txt the site serves, and whether a physical file overrides WordPress and your SEO plugin. |
+| Schema Checker | List the JSON-LD and microdata structured data a page actually emits. |
+| Unused Field Checker | Find ACF fields that no template references and no post has filled in, so you know which are safe to delete. |
+
+### Content
+
 | Tool | What it does |
 |------|--------------|
 | ACF Default Backfill | Fill empty ACF fields with their configured default value across all posts of a chosen post type. |
-| ACF Field Audit | Find ACF fields that no template references and no post has filled in, so you know which are safe to delete. |
-| Broken Link Checker | Scan published content for broken links and images, with batched HTTP checks. |
-| Bulk Image Assigner | Bulk assign or clear media images on ACF image fields or the featured image across a post type. |
 | Bulk Page Creation | Bulk create posts, pages or custom post types from a single repeater form. |
-| Favicon Checker | Check that favicon markup, the .ico size variants and every icon file are present and non-empty. |
-| Phone Number Checker | Scan published content for phone numbers not wrapped in a `tel:` link. |
 | Post Type Mover | Bulk move posts between post types, with a dry-run preview, ACF field mapping and per-run undo. |
+
+### Media
+
+| Tool | What it does |
+|------|--------------|
+| Bulk Image Assigner | Bulk assign or clear media images on ACF image fields or the featured image across a post type. |
+| Webp Converter | Upload or pick existing images and convert or compress them to WebP in place. |
+
+### Development
+
+| Tool | What it does |
+|------|--------------|
 | Redirect List Builder | Turn pasted old and new URLs into a redirect list and download it as a .txt. |
-| Robots.txt Check | See the robots.txt the site serves, and whether a physical file overrides WordPress and your SEO plugin. |
-| Schema Checker | List the JSON-LD and microdata structured data a page actually emits. |
 | Search & Replace | Replace text across database tables, serialized data included, behind a required dry run. |
 | Theme Editor | Monaco-based editor for every installed theme, with fuzzy file search, project-wide grep, go-to-definition and revertible saves. |
 | Usage Finder | See what uses a page template, template part, field group, flexible layout or shortcode before you change or delete it. |
-| Webp Converter | Upload or pick existing images and convert or compress them to WebP in place. |
 
-## Settings and shortcuts
+## Settings
 
-**Street Tools > Settings** holds per-user options, all off by default:
+**Street Tools > Settings** holds per-user options, all off until each user switches them on:
 
-- **Admin bar shortcut:** `Ctrl/Cmd+Shift+Y` shows or hides the admin bar on the frontend.
-- **Page search:** `Ctrl/Cmd+K` opens a search palette for pages and public custom post types. Enter opens the page, Shift+Enter opens the editor.
+- **Admin Bar Shortcut:** `Ctrl/Cmd+Shift+Y` shows or hides the admin bar on the frontend. This shares the "Show Toolbar when viewing site" profile setting.
+- **Page Search:** `Ctrl/Cmd+K` on the frontend opens a search palette for pages, public custom post types and Street Tools screens. Drafts and private pages are included. Enter opens the page, Shift+Enter opens the editor.
+- **Better Menus:** adds A to Z sub-item sorting and bulk moving to **Appearance > Menus**. Pick a parent item, then sort its sub-items or, with Bulk Select on, move ticked items under it. Nothing is saved until you click **Save Menu**.
 
 ## Reporting issues
 
