@@ -8,6 +8,15 @@ This repository holds no source code. Releases are mirrored here automatically w
 
 Get `street-tools.zip` from the [latest release](https://github.com/quietcactus/street-tools-releases/releases/latest). Older versions stay available on the [releases list](https://github.com/quietcactus/street-tools-releases/releases).
 
+## Requirements
+
+- WordPress 6.0 or later
+- PHP 7.4 or later
+- [Advanced Custom Fields](https://www.advancedcustomfields.com/) for ACF Default Backfill and Unused Field Checker
+- [Yoast SEO](https://yoast.com/wordpress/plugins/seo/) for Yoast Setup
+
+A tool whose required plugin is not active stays listed but is marked unavailable.
+
 ## Install
 
 1. In WordPress, go to **Plugins > Add New > Upload Plugin**.
@@ -53,6 +62,7 @@ The migration does not carry over:
 | Favicon Checker | Check that favicon markup, the .ico size variants and every icon file are present and non-empty. |
 | H1 Checker | List every H1 saved in a post type's content and custom fields, including ACF and Elementor. |
 | Image Checker | List the image every post holds per image field, spot empty or broken ones, and export the lot to CSV. |
+| Metadata Checker | Find pages sharing a duplicate page title, title tag or meta description. Title tags and descriptions are read from each page as a logged-out visitor sees it, not from SEO plugin templates. |
 | Phone Number Checker | Scan published content for phone numbers not wrapped in a `tel:` link. |
 | Robots.txt Checker | See the robots.txt the site serves, and whether a physical file overrides WordPress and your SEO plugin. |
 | Schema Checker | List the JSON-LD and microdata structured data a page actually emits. |
@@ -65,6 +75,7 @@ The migration does not carry over:
 | ACF Default Backfill | Fill empty ACF fields with their configured default value across all posts of a chosen post type. |
 | Bulk Page Creation | Bulk create posts, pages or custom post types from a single repeater form. |
 | Post Type Mover | Bulk move posts between post types, with a dry-run preview, ACF field mapping and per-run undo. |
+| Site Architecture | Map every published page into a URL tree across all post types and export it to Excel, with title tags, meta descriptions, templates and indexable status. |
 
 ### Media
 
@@ -81,6 +92,7 @@ The migration does not carry over:
 | Search & Replace | Replace text across database tables, serialized data included, behind a required dry run. |
 | Theme Editor | Monaco-based editor for every installed theme, with fuzzy file search, project-wide grep, go-to-definition and revertible saves. |
 | Usage Finder | See what uses a page template, template part, field group, flexible layout or shortcode before you change or delete it. |
+| Yoast Setup | Compare Yoast SEO settings with the PaperStreet checklist and apply the checklist in one step. Current settings are backed up before every write and can be restored from the same page. Requires Yoast SEO. |
 
 ## Settings
 
