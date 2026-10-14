@@ -12,8 +12,8 @@ Get `street-tools.zip` from the [latest release](https://github.com/quietcactus/
 
 - WordPress 6.0 or later
 - PHP 7.4 or later
-- [Advanced Custom Fields](https://www.advancedcustomfields.com/) for ACF Default Backfill and Unused Field Checker
-- [Yoast SEO](https://yoast.com/wordpress/plugins/seo/) for Yoast Setup
+- [Advanced Custom Fields](https://www.advancedcustomfields.com/) for ACF Default Backfill, Unused Field Checker and the ACF field overlay
+- [Yoast SEO](https://yoast.com/wordpress/plugins/seo/) for Yoast Setup, and for the Metadata Checker's fast scan
 
 A tool whose required plugin is not active stays listed but is marked unavailable.
 
@@ -62,11 +62,12 @@ The migration does not carry over:
 | Favicon Checker | Check that favicon markup, the .ico size variants and every icon file are present and non-empty. |
 | H1 Checker | List every H1 saved in a post type's content and custom fields, including ACF and Elementor. |
 | Image Checker | List the image every post holds per image field, spot empty or broken ones, and export the lot to CSV. |
-| Metadata Checker | Find pages sharing a duplicate page title, title tag or meta description. Title tags and descriptions are read from each page as a logged-out visitor sees it, not from SEO plugin templates. |
+| Metadata Checker | Find pages sharing a duplicate page title, title tag or meta description. With Yoast SEO active it reads the values Yoast renders in one fast pass. **Verify against live pages** fetches each page as a logged-out visitor sees it instead, catching titles a theme or another plugin writes. Sites without Yoast are always checked live. |
 | Phone Number Checker | Scan published content for phone numbers not wrapped in a `tel:` link. |
 | Robots.txt Checker | See the robots.txt the site serves, and whether a physical file overrides WordPress and your SEO plugin. |
 | Schema Checker | List the JSON-LD and microdata structured data a page actually emits. |
 | Unused Field Checker | Find ACF fields that no template references and no post has filled in, so you know which are safe to delete. |
+| URL Checker | Find slugs that repeat a word from a parent URL or from themselves, or end in a `-2` style suffix. Stop words such as "and" or "the" are ignored, and the list is editable. |
 
 ### Content
 
@@ -81,6 +82,7 @@ The migration does not carry over:
 
 | Tool | What it does |
 |------|--------------|
+| Alt Text Checker | Find images with missing or filename-style alt text in the media library and in published content, fix media library alt text in place, and export the lists to CSV. Empty `alt=""` is listed separately, since it is correct for decorative images. |
 | Bulk Image Assigner | Bulk assign or clear media images on ACF image fields or the featured image across a post type. |
 | Webp Converter | Upload or pick existing images and convert or compress them to WebP in place. |
 
@@ -89,7 +91,7 @@ The migration does not carry over:
 | Tool | What it does |
 |------|--------------|
 | Redirect List Builder | Turn pasted old and new URLs into a redirect list and download it as a .txt. |
-| Search & Replace | Replace text across database tables, serialized data included, behind a required dry run. |
+| Search & Replace | Replace text across database tables, serialized data included, behind a required dry run. Each found row shows the page it belongs to. |
 | Theme Editor | Monaco-based editor for every installed theme, with fuzzy file search, project-wide grep, go-to-definition and revertible saves. |
 | Usage Finder | See what uses a page template, template part, field group, flexible layout or shortcode before you change or delete it. |
 | Yoast Setup | Compare Yoast SEO settings with the PaperStreet checklist and apply the checklist in one step. Current settings are backed up before every write and can be restored from the same page. Requires Yoast SEO. |
@@ -101,12 +103,14 @@ The migration does not carry over:
 - **Admin Bar Shortcut:** `Ctrl/Cmd+Shift+Y` shows or hides the admin bar on the frontend. This shares the "Show Toolbar when viewing site" profile setting.
 - **Page Search:** `Ctrl/Cmd+K` on the frontend opens a search palette for pages, public custom post types and Street Tools screens. Drafts and private pages are included. Enter opens the page, Shift+Enter opens the editor.
 - **Better Menus:** adds A to Z sub-item sorting and bulk moving to **Appearance > Menus**. Pick a parent item, then sort its sub-items or, with Bulk Select on, move ticked items under it. Nothing is saved until you click **Save Menu**.
+- **ACF Field Overlay:** `Ctrl/Cmd+Shift+E` on the frontend outlines the content each ACF field on the page produced. Click an outline to open the post or options page in a new tab with that field opened, scrolled to and focused. Fields used by the template but not found on the page are listed separately. The **Edit ACF fields** admin bar item toggles it too. Esc closes it. Requires ACF, and only users who switched it on ever see it.
+  - Not covered: fields on terms, users and blocks; post object, relationship and taxonomy fields; and values read unformatted.
 
 ## Reporting issues
 
 [Open an issue](https://github.com/quietcactus/street-tools-releases/issues/new) with:
 
-- The Street Tools version (shown in the release you installed)
+- The Street Tools version (shown next to the Street Tools name at the top of every Street Tools screen, linked to its release notes)
 - Your WordPress and PHP versions
 - Which tool is affected
 - Steps to reproduce, and what you expected versus what happened
